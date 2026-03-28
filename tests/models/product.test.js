@@ -174,5 +174,13 @@ describe('Product Model', () => {
                 expect(product.category).toBe(category);
             }
         });
+
+        test('should find products by category', async () => {
+            const products = await ProductFactory.createList(10);
+            const targetPrice = products[0].price
+
+            const found = await Product.findByPrice(targetPrice);
+            expect(found.length).toBeGreaterThan(0)
+        });
     })
 });
